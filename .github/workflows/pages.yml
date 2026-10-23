@@ -20,7 +20,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
       - name: Extract static website
-        run: unzip -q site.zip -d site
+        run: |
+          unzip -q site.zip -d site
+          if [ -d overrides ]; then cp -a overrides/. site/; fi
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
